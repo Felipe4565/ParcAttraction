@@ -11,5 +11,7 @@ RUN useradd -l -u "$MY_UID" -g "$MY_GID" node
 
 RUN chown -R "$MY_UID:$MY_GID" /home/node
 
+RUN npm install -g @angular/cli
+
 WORKDIR /home/node/app
 
