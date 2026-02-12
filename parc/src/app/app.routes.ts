@@ -8,6 +8,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 export const utilisateurEstConnecte = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
+  authService.setUser();
   
   if (authService.isLoggedIn) {
     //Appel pour vérifier token sinon pas bon on redirige vers connexion

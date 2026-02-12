@@ -6,8 +6,8 @@ services:
     build:
       context: ./parc
       args:
-        MY_UID: ${MY_UID:-0}
-        MY_GID: ${MY_GID:-0}
+        MY_UID: 1000
+        MY_GID: 1000
     command: ./init-angular.sh
     volumes:
       - ./parc:/home/node/app

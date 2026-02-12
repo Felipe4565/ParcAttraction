@@ -29,12 +29,34 @@ def addAttraction():
 
 @app.get('/attraction')
 def getAllAttraction():
-    result = attraction.get_all_attraction()
+    result = attraction.get_all_visible_attraction()
     return result, 200
 
 @app.get('/attraction/<int:index>')
 def getAttraction(index):
+    result = attraction.get_visible_attraction(index)
+    if result == []:
+        return jsonify({"message": "Not found"}), 404
+    return result, 200
+
+@app.get('/admin/attraction')
+def getAllAttractionAdmin():
+    checkToken = user.check_token(request)
+    if (checkToken != True):
+        return checkToken
+
+    result = attraction.get_all_attraction()
+    return result, 200
+
+@app.get('/admin/attraction/<int:index>')
+def getAttractionAdmin(index):
+    checkToken = user.check_token(request)
+    if (checkToken != True):
+        return checkToken
+
     result = attraction.get_attraction(index)
+    if result == []:
+        return jsonify({"message": "Not found"}), 404
     return result, 200
 
 @app.delete('/attraction/<int:index>')

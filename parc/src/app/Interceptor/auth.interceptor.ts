@@ -6,11 +6,14 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
   if (localStorage.getItem('user') != null && localStorage.getItem('user') != "") {
     user = JSON.parse(localStorage.getItem('user')!) as UserInterface;
   }
-  request = request.clone({
-    setHeaders: {
-      Authorization: user ? `Token ${user.token}` : '',
-    },
-  });
+
+  if (user?.token) {
+    request = request.clone({
+      setHeaders: {
+        Authorization: `Token ${user.token}`,
+      },
+    });
+  }
 
   return next(request);
 };

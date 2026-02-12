@@ -19,6 +19,12 @@ export class AttractionService {
     return data as Observable<AttractionInterface[]>;
   }
 
+  public getAllAttractionAdmin() : Observable<AttractionInterface[]> {
+    const url = "https://api/admin/attraction"
+    const data = this.dataService.getData(url);
+    return data as Observable<AttractionInterface[]>;
+  }
+
   public postAttraction(attraction: AttractionInterface): Observable<MessageInterface> {
     const url = "https://api/attraction";
     const data = this.dataService.postData(url, attraction);
